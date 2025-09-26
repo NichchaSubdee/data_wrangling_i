@@ -129,7 +129,8 @@ litters_df
 
 ## `Select`
 
-Choose some columns and not others
+Operate on columns: move, rename, remove etc. Choose some columns and
+not others
 
 ``` r
 select(litters_df, group, litter_number)
@@ -778,3 +779,297 @@ relocate(litters_df, litter_number)
     ## 49               0            6
 
 relocate litter_number column to the first column
+
+## `filter`
+
+Operate on rows Need true or false condition
+
+``` r
+filter(litters_df, gd0_weight < 22)
+```
+
+    ##    group litter_number gd0_weight gd18_weight gd_of_birth pups_born_alive
+    ## 1   Con7           #85       19.7        34.7          20               3
+    ## 2   Con8       #2/95/3                   <NA>          20               8
+    ## 3   Mod7           #59         17        33.4          19               8
+    ## 4   Mod7          #103       21.4        42.1          19               9
+    ## 5   Mod7    #8/110/3-2          .           .          20               9
+    ## 6   Mod7          #106       21.7        37.8          20               5
+    ## 7   Mod7           #62       19.5        35.9          19               7
+    ## 8   Mod8       #5/93/2          .           .          19               8
+    ## 9   Low8           #53       21.8        37.2          20               8
+    ## 10  Low8          #100         20        39.2          20               8
+    ## 11  Low8         #4/84       21.8        35.2          20               4
+    ##    pups_dead_birth pups_survive
+    ## 1                4            3
+    ## 2                0            8
+    ## 3                0            5
+    ## 4                1            9
+    ## 5                0            9
+    ## 6                0            2
+    ## 7                2            4
+    ## 8                0            8
+    ## 9                1            7
+    ## 10               0            7
+    ## 11               0            4
+
+``` r
+filter(litters_df, gd0_weight >= 22)
+```
+
+    ##    group litter_number gd0_weight gd18_weight gd_of_birth pups_born_alive
+    ## 1   Con7     #1/2/95/2         27          42          19               8
+    ## 2   Con7 #5/5/3/83/3-3         26        41.4          19               6
+    ## 3   Con7   #5/4/2/95/2       28.5        44.1          19               5
+    ## 4   Con8   #3/5/2/2/95       28.5        <NA>          20               8
+    ## 5   Con8   #5/4/3/83/3         28        <NA>          19               9
+    ## 6   Mod7     #3/82/3-2         28        45.9          20               5
+    ## 7   Mod7     #4/2/95/2       23.5        <NA>          19               9
+    ## 8   Mod7   #5/3/83/5-2       22.6          37          19               5
+    ## 9   Mod7         #94/2       24.4        42.9          19               7
+    ## 10  Low7         #84/2       24.3        40.8          20               8
+    ## 11  Low7          #107       22.6        42.4          20               9
+    ## 12  Low7         #85/2       22.2        38.5          20               8
+    ## 13  Low7           #98       23.8        43.8          20               9
+    ## 14  Low7          #102       22.6        43.3          20              11
+    ## 15  Low7          #101       23.8        42.7          20               9
+    ## 16  Low7          #111       25.5        44.6          20               3
+    ## 17  Low7          #112       23.9        40.5          19               6
+    ## 18  Mod8           #97       24.5        42.8          20               8
+    ## 19  Mod8     #7/82-3-2       26.9        43.2          20               7
+    ## 20  Mod8    #7/110/3-2       27.5          46          19               8
+    ## 21  Mod8       #2/95/2       28.5        44.5          20               9
+    ## 22  Mod8         #82/4       33.4        52.7          20               8
+    ## 23  Low8           #79       25.4        43.8          19               8
+    ## 24  Low8          #108       25.6        47.5          20               8
+    ## 25  Low8           #99       23.5          39          20               6
+    ## 26  Low8          #110       25.5        42.7          20               7
+    ##    pups_dead_birth pups_survive
+    ## 1                0            7
+    ## 2                0            5
+    ## 3                1            4
+    ## 4                0            8
+    ## 5                0            8
+    ## 6                0            5
+    ## 7                0            7
+    ## 8                0            5
+    ## 9                1            3
+    ## 10               0            8
+    ## 11               0            8
+    ## 12               0            6
+    ## 13               0            9
+    ## 14               0            7
+    ## 15               0            9
+    ## 16               2            3
+    ## 17               1            1
+    ## 18               1            8
+    ## 19               0            7
+    ## 20               1            8
+    ## 21               0            9
+    ## 22               0            6
+    ## 23               0            7
+    ## 24               0            7
+    ## 25               0            5
+    ## 26               0            6
+
+``` r
+filter(litters_df, gd_of_birth == 20)
+```
+
+    ##    group   litter_number gd0_weight gd18_weight gd_of_birth pups_born_alive
+    ## 1   Con7             #85       19.7        34.7          20               3
+    ## 2   Con7     #4/2/95/3-3       <NA>        <NA>          20               6
+    ## 3   Con7     #2/2/95/3-2       <NA>                      20               6
+    ## 4   Con7 #1/5/3/83/3-3/2       <NA>                      20               9
+    ## 5   Con8       #3/83/3-3       <NA>        <NA>          20               9
+    ## 6   Con8         #2/95/3                   <NA>          20               8
+    ## 7   Con8     #3/5/2/2/95       28.5        <NA>          20               8
+    ## 8   Con8   #1/6/2/2/95-2       <NA>        <NA>          20               7
+    ## 9   Con8 #3/5/3/83/3-3-2       <NA>        <NA>          20               8
+    ## 10  Con8   #3/6/2/2/95-3       <NA>        <NA>          20               7
+    ## 11  Mod7       #2/95/2-2       <NA>        <NA>          20               7
+    ## 12  Mod7       #3/82/3-2         28        45.9          20               5
+    ## 13  Mod7      #8/110/3-2          .           .          20               9
+    ## 14  Mod7            #106       21.7        37.8          20               5
+    ## 15  Low7           #84/2       24.3        40.8          20               8
+    ## 16  Low7            #107       22.6        42.4          20               9
+    ## 17  Low7           #85/2       22.2        38.5          20               8
+    ## 18  Low7             #98       23.8        43.8          20               9
+    ## 19  Low7            #102       22.6        43.3          20              11
+    ## 20  Low7            #101       23.8        42.7          20               9
+    ## 21  Low7            #111       25.5        44.6          20               3
+    ## 22  Mod8             #97       24.5        42.8          20               8
+    ## 23  Mod8           #5/93       <NA>        41.1          20              11
+    ## 24  Mod8       #7/82-3-2       26.9        43.2          20               7
+    ## 25  Mod8         #2/95/2       28.5        44.5          20               9
+    ## 26  Mod8           #82/4       33.4        52.7          20               8
+    ## 27  Low8             #53       21.8        37.2          20               8
+    ## 28  Low8            #100         20        39.2          20               8
+    ## 29  Low8           #4/84       21.8        35.2          20               4
+    ## 30  Low8            #108       25.6        47.5          20               8
+    ## 31  Low8             #99       23.5          39          20               6
+    ## 32  Low8            #110       25.5        42.7          20               7
+    ##    pups_dead_birth pups_survive
+    ## 1                4            3
+    ## 2                0            6
+    ## 3                0            4
+    ## 4                0            9
+    ## 5                1            8
+    ## 6                0            8
+    ## 7                0            8
+    ## 8                0            6
+    ## 9                0            8
+    ## 10               0            7
+    ## 11               0            7
+    ## 12               0            5
+    ## 13               0            9
+    ## 14               0            2
+    ## 15               0            8
+    ## 16               0            8
+    ## 17               0            6
+    ## 18               0            9
+    ## 19               0            7
+    ## 20               0            9
+    ## 21               2            3
+    ## 22               1            8
+    ## 23               0            9
+    ## 24               0            7
+    ## 25               0            9
+    ## 26               0            6
+    ## 27               1            7
+    ## 28               0            7
+    ## 29               0            4
+    ## 30               0            7
+    ## 31               0            5
+    ## 32               0            6
+
+= is used for giving a value to something like x = 20. BUT == is used
+for comparison. To check whether two values are equal. As an example
+above, it means this will return TRUE if x is 20, FALSE otherwise. Or
+“Keep only the rows where the columns gd_of_birth is equal to 20”
+
+``` r
+filter(litters_df, !(gd_of_birth == 20))
+```
+
+    ##    group litter_number gd0_weight gd18_weight gd_of_birth pups_born_alive
+    ## 1   Con7     #1/2/95/2         27          42          19               8
+    ## 2   Con7 #5/5/3/83/3-3         26        41.4          19               6
+    ## 3   Con7   #5/4/2/95/2       28.5        44.1          19               5
+    ## 4   Con8   #5/4/3/83/3         28        <NA>          19               9
+    ## 5   Con8     #2/2/95/2       <NA>        <NA>          19               5
+    ## 6   Mod7           #59         17        33.4          19               8
+    ## 7   Mod7          #103       21.4        42.1          19               9
+    ## 8   Mod7     #1/82/3-2       <NA>        <NA>          19               6
+    ## 9   Mod7     #3/83/3-2       <NA>        <NA>          19               8
+    ## 10  Mod7     #4/2/95/2       23.5        <NA>          19               9
+    ## 11  Mod7   #5/3/83/5-2       22.6          37          19               5
+    ## 12  Mod7         #94/2       24.4        42.9          19               7
+    ## 13  Mod7           #62       19.5        35.9          19               7
+    ## 14  Low7          #112       23.9        40.5          19               6
+    ## 15  Mod8       #5/93/2          .           .          19               8
+    ## 16  Mod8    #7/110/3-2       27.5          46          19               8
+    ## 17  Low8           #79       25.4        43.8          19               8
+    ##    pups_dead_birth pups_survive
+    ## 1                0            7
+    ## 2                0            5
+    ## 3                1            4
+    ## 4                0            8
+    ## 5                0            4
+    ## 6                0            5
+    ## 7                1            9
+    ## 8                0            6
+    ## 9                0            8
+    ## 10               0            7
+    ## 11               0            5
+    ## 12               1            3
+    ## 13               2            4
+    ## 14               1            1
+    ## 15               0            8
+    ## 16               1            8
+    ## 17               0            7
+
+Put ! meaning Not equal to 20
+
+``` r
+filter(litters_df, gd0_weight >= 22, gd_of_birth == 20)
+```
+
+    ##    group litter_number gd0_weight gd18_weight gd_of_birth pups_born_alive
+    ## 1   Con8   #3/5/2/2/95       28.5        <NA>          20               8
+    ## 2   Mod7     #3/82/3-2         28        45.9          20               5
+    ## 3   Low7         #84/2       24.3        40.8          20               8
+    ## 4   Low7          #107       22.6        42.4          20               9
+    ## 5   Low7         #85/2       22.2        38.5          20               8
+    ## 6   Low7           #98       23.8        43.8          20               9
+    ## 7   Low7          #102       22.6        43.3          20              11
+    ## 8   Low7          #101       23.8        42.7          20               9
+    ## 9   Low7          #111       25.5        44.6          20               3
+    ## 10  Mod8           #97       24.5        42.8          20               8
+    ## 11  Mod8     #7/82-3-2       26.9        43.2          20               7
+    ## 12  Mod8       #2/95/2       28.5        44.5          20               9
+    ## 13  Mod8         #82/4       33.4        52.7          20               8
+    ## 14  Low8          #108       25.6        47.5          20               8
+    ## 15  Low8           #99       23.5          39          20               6
+    ## 16  Low8          #110       25.5        42.7          20               7
+    ##    pups_dead_birth pups_survive
+    ## 1                0            8
+    ## 2                0            5
+    ## 3                0            8
+    ## 4                0            8
+    ## 5                0            6
+    ## 6                0            9
+    ## 7                0            7
+    ## 8                0            9
+    ## 9                2            3
+    ## 10               1            8
+    ## 11               0            7
+    ## 12               0            9
+    ## 13               0            6
+    ## 14               0            7
+    ## 15               0            5
+    ## 16               0            6
+
+``` r
+filter(litters_df, group == "Con7")
+```
+
+    ##   group   litter_number gd0_weight gd18_weight gd_of_birth pups_born_alive
+    ## 1  Con7             #85       19.7        34.7          20               3
+    ## 2  Con7       #1/2/95/2         27          42          19               8
+    ## 3  Con7   #5/5/3/83/3-3         26        41.4          19               6
+    ## 4  Con7     #5/4/2/95/2       28.5        44.1          19               5
+    ## 5  Con7     #4/2/95/3-3       <NA>        <NA>          20               6
+    ## 6  Con7     #2/2/95/3-2       <NA>                      20               6
+    ## 7  Con7 #1/5/3/83/3-3/2       <NA>                      20               9
+    ##   pups_dead_birth pups_survive
+    ## 1               4            3
+    ## 2               0            7
+    ## 3               0            5
+    ## 4               1            4
+    ## 5               0            6
+    ## 6               0            4
+    ## 7               0            9
+
+``` r
+filter(litters_df, group %in% c("Con7", "MOD8"))
+```
+
+    ##   group   litter_number gd0_weight gd18_weight gd_of_birth pups_born_alive
+    ## 1  Con7             #85       19.7        34.7          20               3
+    ## 2  Con7       #1/2/95/2         27          42          19               8
+    ## 3  Con7   #5/5/3/83/3-3         26        41.4          19               6
+    ## 4  Con7     #5/4/2/95/2       28.5        44.1          19               5
+    ## 5  Con7     #4/2/95/3-3       <NA>        <NA>          20               6
+    ## 6  Con7     #2/2/95/3-2       <NA>                      20               6
+    ## 7  Con7 #1/5/3/83/3-3/2       <NA>                      20               9
+    ##   pups_dead_birth pups_survive
+    ## 1               4            3
+    ## 2               0            7
+    ## 3               0            5
+    ## 4               1            4
+    ## 5               0            6
+    ## 6               0            4
+    ## 7               0            9
+
+rows either have con7 or mod8
