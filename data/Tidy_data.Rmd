@@ -69,5 +69,25 @@ pulse_data =
 
 ```
 
+## `pivot_wider`
+
+Make up some data!
+
+```{r}
+analysis_result = 
+  tibble(
+    group = c("treatment", "treament", "placebo", "placebo"),
+    time = c("pre", "post", "pre", "post"),
+    mean = c(4, 8, 3.5, 4)
+  )
+
+analysis_result |> 
+  pivot_wider(
+    names_from = "time",
+    values_from = "mean"
+  )
+```
+
+
 
 
