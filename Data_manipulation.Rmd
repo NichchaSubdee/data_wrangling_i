@@ -13,7 +13,60 @@ library(tidyverse)
 litters_df = read.csv("C:/Users/prize/Dropbox/Prize/CUIMC_MPH2YR/Fall 2025/Data Science I/Week 3/data_wrangling_i/data/FAS_litters.csv")
 
 litters_df = janitor::clean_names(litters_df)
+
+litters_df
 ```
+
+## `Select`
+
+Choose some columns and not others
+
+```{r}
+select(litters_df, group, litter_number)
+```
+
+```{r}
+select(litters_df, group, gd0_weight: gd_of_birth)
+```
+
+```{r}
+select(litters_df, -litter_number)
+```
+
+
+Renaming columns...
+```{r}
+select(litters_df, GROUP = group, LITTer_NUmBer = litter_number)
+```
+
+```{r}
+rename(litters_df, GROUP = group, LITTer_NUmBer = litter_number)
+```
+
+Select helpers
+```{r}
+select(litters_df, starts_with("gd"))
+```
+Select columns that start with gd
+
+```{r}
+select(litters_df, litter_number, everything())
+```
+
+```{r}
+relocate(litters_df, litter_number)
+```
+relocate litter_number column to the first column
+
+
+
+
+
+
+
+
+
+
 
 
 
