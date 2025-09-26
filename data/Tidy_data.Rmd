@@ -1,0 +1,22 @@
+---
+title: "Tidy data"
+output: github_document
+---
+
+```{r setup}
+library(tidyverse)
+options(tibble.print_min = 5)
+```
+
+```{r}
+pulse_df = 
+  haven::read_sas("C:/Users/prize/Dropbox/Prize/CUIMC_MPH2YR/Fall 2025/Data Science I/Week 2/data_manipulation/tidy data/data/public_pulse_data.sas7bdat") |> 
+  janitor::clean_names()
+
+pulse_df
+```
+
+
+
+
+
