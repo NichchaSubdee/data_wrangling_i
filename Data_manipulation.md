@@ -15,3 +15,11 @@ library(tidyverse)
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
     ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+## Load in the FAS litters data
+
+``` r
+litters_df = read.csv("C:/Users/prize/Dropbox/Prize/CUIMC_MPH2YR/Fall 2025/Data Science I/Week 3/data_wrangling_i/data/FAS_litters.csv")
+
+litters_df = janitor::clean_names(litters_df)
+```
