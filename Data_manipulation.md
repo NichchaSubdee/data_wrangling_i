@@ -1313,3 +1313,64 @@ arrange(litters_df, pups_born_alive)
     ## 47               0            9    16.0
     ## 48               0            7    20.7
     ## 49               0            9      NA
+
+## `%>%` pipe operation
+
+``` r
+litters_data_raw = read_csv("C:/Users/prize/Dropbox/Prize/CUIMC_MPH2YR/Fall 2025/Data Science I/Week 3/data_wrangling_i/data/FAS_litters.csv")
+```
+
+    ## Rows: 49 Columns: 8
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (4): Group, Litter Number, GD0 weight, GD18 weight
+    ## dbl (4): GD of Birth, Pups born alive, Pups dead @ birth, Pups survive
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
+litters_clean_name = janitor::clean_names(litters_data_raw)
+
+litters_data_selected = select (litters_clean_name, -pups_survive)
+
+litters_mutated = mutate(litters_data_selected, wt_gain = as.numeric(gd18_weight) - as.numeric(gd0_weight))
+```
+
+    ## Warning: There were 2 warnings in `mutate()`.
+    ## The first warning was:
+    ## ℹ In argument: `wt_gain = as.numeric(gd18_weight) - as.numeric(gd0_weight)`.
+    ## Caused by warning:
+    ## ! NAs introduced by coercion
+    ## ℹ Run `dplyr::last_dplyr_warnings()` to see the 1 remaining warning.
+
+``` r
+litters_without_missing = drop_na(litters_mutated, gd0_weight)
+```
+
+we can Nested!! USE the pipe operator instead
+
+``` r
+litters_df = read_csv("C:/Users/prize/Dropbox/Prize/CUIMC_MPH2YR/Fall 2025/Data Science I/Week 3/data_wrangling_i/data/FAS_litters.csv") |> 
+
+janitor::clean_names() |> 
+  select(-pups_survive) |> 
+  mutate(wt_gain = as.numeric(gd18_weight) - as.numeric(gd0_weight)) |> 
+  drop_na(gd0_weight)
+```
+
+    ## Rows: 49 Columns: 8
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (4): Group, Litter Number, GD0 weight, GD18 weight
+    ## dbl (4): GD of Birth, Pups born alive, Pups dead @ birth, Pups survive
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+    ## Warning: There were 2 warnings in `mutate()`.
+    ## The first warning was:
+    ## ℹ In argument: `wt_gain = as.numeric(gd18_weight) - as.numeric(gd0_weight)`.
+    ## Caused by warning:
+    ## ! NAs introduced by coercion
+    ## ℹ Run `dplyr::last_dplyr_warnings()` to see the 1 remaining warning.
