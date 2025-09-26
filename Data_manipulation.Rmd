@@ -113,6 +113,14 @@ group = str_to_lower(group)
 ```
 Create a new variable and modify variable at the same mutate command
 
+## `arrange`
+putting things in order
+don't use often
+
+```{r}
+arrange(litters_df, pups_born_alive)
+```
+
 
 
 
