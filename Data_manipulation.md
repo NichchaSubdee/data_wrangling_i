@@ -1073,3 +1073,134 @@ filter(litters_df, group %in% c("Con7", "MOD8"))
     ## 7               0            9
 
 rows either have con7 or mod8
+
+## `Mutate`
+
+modify existing variable or creating new variable
+
+``` r
+litters_df <- litters_df %>%
+  mutate(
+    gd18_weight = as.numeric(gd18_weight),
+    gd0_weight  = as.numeric(gd0_weight),
+    wt_gain = gd18_weight - gd0_weight
+  )
+```
+
+    ## Warning: There were 2 warnings in `mutate()`.
+    ## The first warning was:
+    ## ℹ In argument: `gd18_weight = as.numeric(gd18_weight)`.
+    ## Caused by warning:
+    ## ! NAs introduced by coercion
+    ## ℹ Run `dplyr::last_dplyr_warnings()` to see the 1 remaining warning.
+
+``` r
+##fix to numeric
+
+mutate(litters_df, wt_gain = gd18_weight - gd0_weight,
+group = str_to_lower(group)
+       )
+```
+
+    ##    group   litter_number gd0_weight gd18_weight gd_of_birth pups_born_alive
+    ## 1   con7             #85       19.7        34.7          20               3
+    ## 2   con7       #1/2/95/2       27.0        42.0          19               8
+    ## 3   con7   #5/5/3/83/3-3       26.0        41.4          19               6
+    ## 4   con7     #5/4/2/95/2       28.5        44.1          19               5
+    ## 5   con7     #4/2/95/3-3         NA          NA          20               6
+    ## 6   con7     #2/2/95/3-2         NA          NA          20               6
+    ## 7   con7 #1/5/3/83/3-3/2         NA          NA          20               9
+    ## 8   con8       #3/83/3-3         NA          NA          20               9
+    ## 9   con8         #2/95/3         NA          NA          20               8
+    ## 10  con8     #3/5/2/2/95       28.5          NA          20               8
+    ## 11  con8     #5/4/3/83/3       28.0          NA          19               9
+    ## 12  con8   #1/6/2/2/95-2         NA          NA          20               7
+    ## 13  con8 #3/5/3/83/3-3-2         NA          NA          20               8
+    ## 14  con8       #2/2/95/2         NA          NA          19               5
+    ## 15  con8   #3/6/2/2/95-3         NA          NA          20               7
+    ## 16  mod7             #59       17.0        33.4          19               8
+    ## 17  mod7            #103       21.4        42.1          19               9
+    ## 18  mod7       #1/82/3-2         NA          NA          19               6
+    ## 19  mod7       #3/83/3-2         NA          NA          19               8
+    ## 20  mod7       #2/95/2-2         NA          NA          20               7
+    ## 21  mod7       #3/82/3-2       28.0        45.9          20               5
+    ## 22  mod7       #4/2/95/2       23.5          NA          19               9
+    ## 23  mod7     #5/3/83/5-2       22.6        37.0          19               5
+    ## 24  mod7      #8/110/3-2         NA          NA          20               9
+    ## 25  mod7            #106       21.7        37.8          20               5
+    ## 26  mod7           #94/2       24.4        42.9          19               7
+    ## 27  mod7             #62       19.5        35.9          19               7
+    ## 28  low7           #84/2       24.3        40.8          20               8
+    ## 29  low7            #107       22.6        42.4          20               9
+    ## 30  low7           #85/2       22.2        38.5          20               8
+    ## 31  low7             #98       23.8        43.8          20               9
+    ## 32  low7            #102       22.6        43.3          20              11
+    ## 33  low7            #101       23.8        42.7          20               9
+    ## 34  low7            #111       25.5        44.6          20               3
+    ## 35  low7            #112       23.9        40.5          19               6
+    ## 36  mod8             #97       24.5        42.8          20               8
+    ## 37  mod8           #5/93         NA        41.1          20              11
+    ## 38  mod8         #5/93/2         NA          NA          19               8
+    ## 39  mod8       #7/82-3-2       26.9        43.2          20               7
+    ## 40  mod8      #7/110/3-2       27.5        46.0          19               8
+    ## 41  mod8         #2/95/2       28.5        44.5          20               9
+    ## 42  mod8           #82/4       33.4        52.7          20               8
+    ## 43  low8             #53       21.8        37.2          20               8
+    ## 44  low8             #79       25.4        43.8          19               8
+    ## 45  low8            #100       20.0        39.2          20               8
+    ## 46  low8           #4/84       21.8        35.2          20               4
+    ## 47  low8            #108       25.6        47.5          20               8
+    ## 48  low8             #99       23.5        39.0          20               6
+    ## 49  low8            #110       25.5        42.7          20               7
+    ##    pups_dead_birth pups_survive wt_gain
+    ## 1                4            3    15.0
+    ## 2                0            7    15.0
+    ## 3                0            5    15.4
+    ## 4                1            4    15.6
+    ## 5                0            6      NA
+    ## 6                0            4      NA
+    ## 7                0            9      NA
+    ## 8                1            8      NA
+    ## 9                0            8      NA
+    ## 10               0            8      NA
+    ## 11               0            8      NA
+    ## 12               0            6      NA
+    ## 13               0            8      NA
+    ## 14               0            4      NA
+    ## 15               0            7      NA
+    ## 16               0            5    16.4
+    ## 17               1            9    20.7
+    ## 18               0            6      NA
+    ## 19               0            8      NA
+    ## 20               0            7      NA
+    ## 21               0            5    17.9
+    ## 22               0            7      NA
+    ## 23               0            5    14.4
+    ## 24               0            9      NA
+    ## 25               0            2    16.1
+    ## 26               1            3    18.5
+    ## 27               2            4    16.4
+    ## 28               0            8    16.5
+    ## 29               0            8    19.8
+    ## 30               0            6    16.3
+    ## 31               0            9    20.0
+    ## 32               0            7    20.7
+    ## 33               0            9    18.9
+    ## 34               2            3    19.1
+    ## 35               1            1    16.6
+    ## 36               1            8    18.3
+    ## 37               0            9      NA
+    ## 38               0            8      NA
+    ## 39               0            7    16.3
+    ## 40               1            8    18.5
+    ## 41               0            9    16.0
+    ## 42               0            6    19.3
+    ## 43               1            7    15.4
+    ## 44               0            7    18.4
+    ## 45               0            7    19.2
+    ## 46               0            4    13.4
+    ## 47               0            7    21.9
+    ## 48               0            5    15.5
+    ## 49               0            6    17.2
+
+Create a new variable and modify variable at the same mutate command

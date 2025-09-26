@@ -95,6 +95,23 @@ filter(litters_df, group %in% c("Con7", "MOD8"))
 ```
 rows either have con7 or mod8
 
+## `Mutate`
+modify existing variable or creating new variable
+
+```{r}
+litters_df <- litters_df %>%
+  mutate(
+    gd18_weight = as.numeric(gd18_weight),
+    gd0_weight  = as.numeric(gd0_weight),
+    wt_gain = gd18_weight - gd0_weight
+  )
+##fix to numeric
+
+mutate(litters_df, wt_gain = gd18_weight - gd0_weight,
+group = str_to_lower(group)
+       )
+```
+Create a new variable and modify variable at the same mutate command
 
 
 
